@@ -198,71 +198,73 @@ export default function Home() {
           </div>
           {/** Suffix end */}
 
-          {/** Relationship start */}
-          <div className='w-full'>
-            <label
-              htmlFor='relationship'
-              className='block mb-2.5 text-sm font-medium text-gray-700'
-            >
-              Department / Account name
-            </label>
-            <div className='relative mt-1 rounded-md shadow-sm'>
-              <input
-                {...register('relationship', { required: true })}
-                type='text'
-                className={classNames(
-                  errors?.relationship
-                    ? 'border-skin-kmc-red border-2'
-                    : 'border-gray-300 ',
-                  'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2'>
+            {/** Relationship start */}
+            <div className='w-full'>
+              <label
+                htmlFor='relationship'
+                className='block mb-2.5 text-sm font-medium text-gray-700'
+              >
+                Department / Account name
+              </label>
+              <div className='relative mt-1 rounded-md shadow-sm'>
+                <input
+                  {...register('relationship', { required: true })}
+                  type='text'
+                  className={classNames(
+                    errors?.relationship
+                      ? 'border-skin-kmc-red border-2'
+                      : 'border-gray-300 ',
+                    'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
+                  )}
+                  aria-invalid='true'
+                  aria-describedby='relationship-error'
+                />
+                {errors?.relationship && (
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
+                    <ExclamationCircleIcon
+                      className='w-5 h-5 text-skin-kmc-red'
+                      aria-hidden='true'
+                    />
+                  </div>
                 )}
-                aria-invalid='true'
-                aria-describedby='relationship-error'
-              />
-              {errors?.relationship && (
-                <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                  <ExclamationCircleIcon
-                    className='w-5 h-5 text-skin-kmc-red'
-                    aria-hidden='true'
-                  />
-                </div>
-              )}
+              </div>
             </div>
-          </div>
-          {/** Relationship end */}
+            {/** Relationship end */}
 
-          {/** Position start */}
-          <div className='w-full'>
-            <label
-              htmlFor='position'
-              className='block mb-2.5 text-sm font-medium text-gray-700'
-            >
-              Position Title
-            </label>
-            <div className='relative mt-1 rounded-md shadow-sm'>
-              <input
-                {...register('position', { required: true })}
-                type='text'
-                className={classNames(
-                  errors?.position
-                    ? 'border-skin-kmc-red border-2'
-                    : 'border-gray-300 ',
-                  'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
+            {/** Position start */}
+            <div className='w-full'>
+              <label
+                htmlFor='position'
+                className='block mb-2.5 text-sm font-medium text-gray-700'
+              >
+                Position Title
+              </label>
+              <div className='relative mt-1 rounded-md shadow-sm'>
+                <input
+                  {...register('position', { required: true })}
+                  type='text'
+                  className={classNames(
+                    errors?.position
+                      ? 'border-skin-kmc-red border-2'
+                      : 'border-gray-300 ',
+                    'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
+                  )}
+                  aria-invalid='true'
+                  aria-describedby='position-error'
+                />
+                {errors?.position && (
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
+                    <ExclamationCircleIcon
+                      className='w-5 h-5 text-skin-kmc-red'
+                      aria-hidden='true'
+                    />
+                  </div>
                 )}
-                aria-invalid='true'
-                aria-describedby='position-error'
-              />
-              {errors?.position && (
-                <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                  <ExclamationCircleIcon
-                    className='w-5 h-5 text-skin-kmc-red'
-                    aria-hidden='true'
-                  />
-                </div>
-              )}
+              </div>
             </div>
+            {/** Position end */}
           </div>
-          {/** Position end */}
 
           {/** Email start */}
           <div className='w-full'>
