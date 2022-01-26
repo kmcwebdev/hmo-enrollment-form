@@ -1,10 +1,14 @@
-import { ExclamationCircleIcon, MailIcon } from '@heroicons/react/solid';
+import { MailIcon } from '@heroicons/react/solid';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Head from 'next/head';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Form } from '../components/Form';
+import TDatepicker from '../components/TDatePicker';
+import TInput from '../components/TInput';
 import TListBoxDesktop from '../components/TListBoxDesktop';
+import IForm from '../interface/form';
 import SelectData from '../interface/select-data';
-import classNames from '../utils/class-name';
+import FormSchema from '../yup-schema/form-schema';
 
 const typesOfEnrollmentData: SelectData[] = [
   { id: 1, name: 'New Hire Dependent Enrollment' },
@@ -18,24 +22,44 @@ const prefixData: SelectData[] = [
   { id: 2, name: 'Ms' },
 ];
 
+const genderData: SelectData[] = [
+  { id: 1, name: 'Male' },
+  { id: 2, name: 'Female' },
+];
+
+const civilStatusData: SelectData[] = [
+  { id: 1, name: 'Single' },
+  { id: 2, name: 'Married' },
+  { id: 3, name: 'Widowed' },
+  { id: 4, name: 'Legally Separated' },
+  { id: 5, name: 'Single Parent' },
+];
+
+const hmoEligibilityData: SelectData[] = [
+  { id: 1, name: 'Upon Hire' },
+  { id: 2, name: 'Upon Regularization' },
+  { id: 3, name: 'After 1 Month' },
+  { id: 4, name: 'After 1 Year' },
+  { id: 5, name: 'After 1 Week' },
+];
+
+const salaryDeductionData: SelectData[] = [
+  { id: 1, name: 'Yes' },
+  { id: 2, name: 'No' },
+];
+
 export default function Home() {
+  const useFormReturn = useForm<IForm>({
+    mode: 'onChange',
+    resolver: yupResolver(FormSchema),
+    defaultValues: {},
+  });
+
   const {
-    register,
-    formState: { errors },
+    formState: { isValid },
     handleSubmit,
-  } = useForm<{
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    suffix: string;
-    relationship: string;
-    position: string;
-    email: string;
-  }>();
-  const [typesOfEnrollment, setTypesOfEnrollment] = useState<SelectData>(
-    typesOfEnrollmentData[0]
-  );
-  const [prefix, setPrefix] = useState<SelectData>(prefixData[0]);
+    getValues,
+  } = useFormReturn;
 
   return (
     <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
@@ -44,260 +68,64 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className='max-w-3xl mx-auto mt-10'>
-        <form
-          className='space-y-6'
+        <Form
+          useFormReturn={useFormReturn}
           onSubmit={handleSubmit(async (data) => console.log(data))}
         >
           <TListBoxDesktop
             label='Type of Enrollment'
+            name='typeOfEnrollment'
             data={typesOfEnrollmentData}
-            selected={typesOfEnrollment}
-            setSelected={setTypesOfEnrollment}
           />
 
-          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2'>
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-5 lg:grid-cols-5'>
+            <div className='col-span-5 lg:col-span-1'>
+              <TListBoxDesktop label='Prefix' name='prefix' data={prefixData} />
+            </div>
+            <div className='col-span-5 lg:col-span-2'>
+              <TInput label='First name' name='firstName' />
+            </div>
+            <div className='col-span-5 lg:col-span-2'>
+              <TInput label='Middle name' name='middleName' />
+            </div>
+          </div>
+
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3'>
+            <TInput label='Last name' name='lastName' />
+            <TInput label='Suffix' name='suffix' />
+            <TListBoxDesktop label='Gender' name='gender' data={genderData} />
+          </div>
+
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2'>
+            <TInput label='Email' type='email' name='email' />
+            <TDatepicker label='Date of Birth' name='dateOfBirth' />
+          </div>
+
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2'>
+            <TInput label='Department / Account Name' name='relation' />
+            <TInput label='Position Title' name='positionTitle' />
+          </div>
+
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2'>
             <TListBoxDesktop
-              label='Prefix'
-              data={prefixData}
-              selected={prefix}
-              setSelected={setPrefix}
+              label='Civil Status'
+              name='civilStatus'
+              data={civilStatusData}
             />
-
-            {/** First name start */}
-            <div className='w-full'>
-              <label
-                htmlFor='firstName'
-                className='block mb-2.5 text-sm font-medium text-gray-700'
-              >
-                First name
-              </label>
-              <div className='relative rounded-md shadow-sm'>
-                <input
-                  {...register('firstName', { required: true })}
-                  type='text'
-                  className={classNames(
-                    errors?.firstName
-                      ? 'border-skin-kmc-red border-2'
-                      : 'border-gray-300',
-                    'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
-                  )}
-                  aria-invalid='true'
-                  aria-describedby='firstName-error'
-                />
-                {errors?.firstName && (
-                  <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                    <ExclamationCircleIcon
-                      className='w-5 h-5 text-skin-kmc-red'
-                      aria-hidden='true'
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-            {/** First name end */}
+            <TDatepicker label='Start Date' name='startDate' />
           </div>
 
-          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2'>
-            {/** Middle name start */}
-            <div className='w-full'>
-              <label
-                htmlFor='middleName'
-                className='block mb-2.5 text-sm font-medium text-gray-700'
-              >
-                Middle name
-              </label>
-              <div className='relative mt-1 rounded-md shadow-sm'>
-                <input
-                  {...register('middleName', { required: true })}
-                  type='text'
-                  className={classNames(
-                    errors?.middleName
-                      ? 'border-skin-kmc-red border-2'
-                      : 'border-gray-300 ',
-                    'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
-                  )}
-                  aria-invalid='true'
-                  aria-describedby='middleName-error'
-                />
-                {errors?.middleName && (
-                  <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                    <ExclamationCircleIcon
-                      className='w-5 h-5 text-skin-kmc-red'
-                      aria-hidden='true'
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-            {/** Middle name end */}
+          <TListBoxDesktop
+            label='HMO Eligibility of Dependent (please verify with your employment contract)'
+            name='hmoEligibility'
+            data={hmoEligibilityData}
+          />
 
-            {/** Last name start */}
-            <div className='w-full'>
-              <label
-                htmlFor='lastName'
-                className='block mb-2.5 text-sm font-medium text-gray-700'
-              >
-                Last name
-              </label>
-              <div className='relative mt-1 rounded-md shadow-sm'>
-                <input
-                  {...register('lastName', { required: true })}
-                  type='text'
-                  className={classNames(
-                    errors?.lastName
-                      ? 'border-skin-kmc-red border-2'
-                      : 'border-gray-300 ',
-                    'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
-                  )}
-                  aria-invalid='true'
-                  aria-describedby='lastName-error'
-                />
-                {errors?.lastName && (
-                  <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                    <ExclamationCircleIcon
-                      className='w-5 h-5 text-skin-kmc-red'
-                      aria-hidden='true'
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-            {/** Last name end */}
-          </div>
-
-          {/** Suffix start */}
-          <div className='w-full'>
-            <label
-              htmlFor='suffix'
-              className='block mb-2.5 text-sm font-medium text-gray-700'
-            >
-              Suffix
-            </label>
-            <div className='relative mt-1 rounded-md shadow-sm'>
-              <input
-                {...register('suffix', { required: true })}
-                type='text'
-                className={classNames(
-                  errors?.suffix
-                    ? 'border-skin-kmc-red border-2'
-                    : 'border-gray-300 ',
-                  'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
-                )}
-                aria-invalid='true'
-                aria-describedby='suffix-error'
-              />
-              {errors?.suffix && (
-                <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                  <ExclamationCircleIcon
-                    className='w-5 h-5 text-skin-kmc-red'
-                    aria-hidden='true'
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-          {/** Suffix end */}
-
-          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2'>
-            {/** Relationship start */}
-            <div className='w-full'>
-              <label
-                htmlFor='relationship'
-                className='block mb-2.5 text-sm font-medium text-gray-700'
-              >
-                Department / Account name
-              </label>
-              <div className='relative mt-1 rounded-md shadow-sm'>
-                <input
-                  {...register('relationship', { required: true })}
-                  type='text'
-                  className={classNames(
-                    errors?.relationship
-                      ? 'border-skin-kmc-red border-2'
-                      : 'border-gray-300 ',
-                    'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
-                  )}
-                  aria-invalid='true'
-                  aria-describedby='relationship-error'
-                />
-                {errors?.relationship && (
-                  <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                    <ExclamationCircleIcon
-                      className='w-5 h-5 text-skin-kmc-red'
-                      aria-hidden='true'
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-            {/** Relationship end */}
-
-            {/** Position start */}
-            <div className='w-full'>
-              <label
-                htmlFor='position'
-                className='block mb-2.5 text-sm font-medium text-gray-700'
-              >
-                Position Title
-              </label>
-              <div className='relative mt-1 rounded-md shadow-sm'>
-                <input
-                  {...register('position', { required: true })}
-                  type='text'
-                  className={classNames(
-                    errors?.position
-                      ? 'border-skin-kmc-red border-2'
-                      : 'border-gray-300 ',
-                    'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
-                  )}
-                  aria-invalid='true'
-                  aria-describedby='position-error'
-                />
-                {errors?.position && (
-                  <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                    <ExclamationCircleIcon
-                      className='w-5 h-5 text-skin-kmc-red'
-                      aria-hidden='true'
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-            {/** Position end */}
-          </div>
-
-          {/** Email start */}
-          <div className='w-full'>
-            <label
-              htmlFor='email'
-              className='block mb-2.5 text-sm font-medium text-gray-700'
-            >
-              Email Address
-            </label>
-            <div className='relative mt-1 rounded-md shadow-sm'>
-              <input
-                {...register('email', { required: true })}
-                type='email'
-                className={classNames(
-                  errors?.email
-                    ? 'border-skin-kmc-red border-2'
-                    : 'border-gray-300 ',
-                  'block w-full pr-10 focus:outline-none focus:ring-skin-kmc-orange focus:border-skin-kmc-orange rounded-md sm:text-sm'
-                )}
-                aria-invalid='true'
-                aria-describedby='email-error'
-              />
-              {errors?.email && (
-                <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                  <ExclamationCircleIcon
-                    className='w-5 h-5 text-skin-kmc-red'
-                    aria-hidden='true'
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-          {/** Email end */}
+          <TListBoxDesktop
+            label='Are you enrolling a dependent for Salary Deduction?'
+            name='salaryDeduction'
+            data={salaryDeductionData}
+          />
 
           <button
             type='submit'
@@ -306,7 +134,7 @@ export default function Home() {
             <MailIcon className='ml-2 -mr-0.5 h-4 w-4' aria-hidden='true' />
             Submit
           </button>
-        </form>
+        </Form>
       </div>
     </div>
   );

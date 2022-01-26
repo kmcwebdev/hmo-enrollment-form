@@ -1,28 +1,33 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { Dispatch, Fragment, SetStateAction } from 'react';
+import { Fragment, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import SelectData from '../interface/select-data';
 import classNames from '../utils/class-name';
 
 interface TListBoxDesktopProps {
   label: string;
-  data: Array<{
-    id: number;
-    name: string;
-  }>;
-  selected: SelectData;
-  setSelected: Dispatch<SetStateAction<SelectData>>;
+  name: string;
+  data: Array<SelectData>;
 }
 
 const TListBoxDesktop: React.FC<TListBoxDesktopProps> = ({
   label,
+  name,
   data,
-  selected,
-  setSelected,
 }) => {
+  const [selected, setSelected] = useState<SelectData>(data[0]);
+
+  const { setValue } = useFormContext();
+
+  const handleChange = (data: SelectData) => {
+    setValue(name, data.name);
+    setSelected(data);
+  };
+
   return (
     <div className='w-full'>
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={handleChange}>
         {({ open }) => (
           <>
             <Listbox.Label className='block text-base font-medium text-gray-700 mb-1.5'>
