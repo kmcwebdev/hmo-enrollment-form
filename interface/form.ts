@@ -5,11 +5,10 @@ export default interface IForm {
   middleName?: string;
   lastName: string;
   suffix?: string;
+  relationship: string;
   gender: string;
-  email: string;
-  relation: string;
-  positionTitle: string;
-  dateOfBirth: Date;
   civilStatus: string;
-  hmoEligibility: string;
+  doB: Date;
+  entitlement: number;
+  reasonForSkippingHierarchy: string;
 }

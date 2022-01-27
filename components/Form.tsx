@@ -16,7 +16,11 @@ export const Form: React.FC<FormProps> = ({
 
   return (
     <FormProvider {...useFormReturn}>
-      <form className='space-y-6' name={name} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className='m-5 space-y-4'
+        name={name}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         {children}
       </form>
     </FormProvider>

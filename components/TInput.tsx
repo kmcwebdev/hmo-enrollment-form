@@ -25,7 +25,7 @@ const TInput: React.FC<TInputProps> = ({
     <div className='w-full'>
       <label
         htmlFor={name}
-        className='block mb-2.5 text-sm font-medium text-gray-700'
+        className='mb-2.5 block text-base font-medium text-gray-700'
       >
         {label}
       </label>

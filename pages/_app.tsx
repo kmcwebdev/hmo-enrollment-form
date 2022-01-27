@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
-import '../styles/datepicker.css';
 import '../styles/globals.css';
+import '../styles/xdatepicker.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;

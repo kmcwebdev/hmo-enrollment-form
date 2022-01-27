@@ -1,6 +1,6 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import SelectData from '../interface/select-data';
 import classNames from '../utils/class-name';
@@ -9,16 +9,24 @@ interface TListBoxDesktopProps {
   label: string;
   name: string;
   data: Array<SelectData>;
+  mb?: number;
 }
 
 const TListBoxDesktop: React.FC<TListBoxDesktopProps> = ({
   label,
   name,
   data,
+  mb,
 }) => {
   const [selected, setSelected] = useState<SelectData>(data[0]);
 
-  const { setValue } = useFormContext();
+  const { setValue, getValues } = useFormContext();
+
+  useEffect(() => {
+    if (!getValues(name)) {
+      setValue(name, selected.name);
+    }
+  }, []);
 
   const handleChange = (data: SelectData) => {
     setValue(name, data.name);
@@ -30,7 +38,12 @@ const TListBoxDesktop: React.FC<TListBoxDesktopProps> = ({
       <Listbox value={selected} onChange={handleChange}>
         {({ open }) => (
           <>
-            <Listbox.Label className='block text-base font-medium text-gray-700 mb-1.5'>
+            <Listbox.Label
+              className={classNames(
+                'block text-base font-medium text-gray-700',
+                mb ? `mb-${mb}` : `mb-2`
+              )}
+            >
               {label}
             </Listbox.Label>
             <div className='relative'>
