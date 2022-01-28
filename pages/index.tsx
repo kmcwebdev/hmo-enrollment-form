@@ -61,7 +61,9 @@ export default function Home() {
   const useFormReturn = useForm<IForm>({
     mode: 'onChange',
     resolver: yupResolver(FormSchema),
-    defaultValues: {},
+    defaultValues: {
+      doB: new Date(),
+    },
   });
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -84,6 +86,18 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className='max-w-3xl mx-auto'>
+        <div className='mt-10'>
+          <p className='text-justify'>
+            Please indicate all required information related to Dependent. Make
+            sure to attach the needed supporting document relative to the
+            enrollment of this dependent.
+          </p>
+        </div>
+        <div className='mt-5'>
+          <div className='inset-0 flex items-center' aria-hidden='true'>
+            <div className='w-full border-t border-skin-kmc-orange' />
+          </div>
+        </div>
         <Form
           useFormReturn={useFormReturn}
           onSubmit={handleSubmit(async (data) => console.log(data))}
@@ -170,7 +184,7 @@ export default function Home() {
                 <div className='flex text-sm text-gray-600'>
                   <label
                     htmlFor='file-upload'
-                    className='relative font-medium text-indigo-600 bg-white rounded-md cursor-pointer hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'
+                    className='relative font-medium bg-white rounded-md cursor-pointer text-skin-kmc-orange hover:text-skin-kmc-orange focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-skin-kmc-orange'
                   >
                     <span>Upload a file</span>
                     <input className='sr-only' {...getInputProps()} />
@@ -191,7 +205,7 @@ export default function Home() {
 
           <button
             type='submit'
-            className='inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm gap-x-2 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+            className='inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-skin-kmc-orange gap-x-2 hover:bg-skin-kmc-orange selection:focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-skin-kmc-orange'
           >
             <MailIcon className='ml-2 -mr-0.5 h-4 w-4' aria-hidden='true' />
             Submit
