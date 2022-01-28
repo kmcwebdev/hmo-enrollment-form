@@ -147,7 +147,10 @@ export default function Home() {
           />
 
           {/** Upload file example start */}
-          <div className='mt-1 sm:mt-0 sm:col-span-2' {...getRootProps()}>
+          <div
+            className='mt-1 cursor-pointer sm:mt-0 sm:col-span-2'
+            {...getRootProps()}
+          >
             <div className='flex justify-center w-full px-6 pt-5 pb-6 border-2 border-dashed rounded-md border-skin-kmc-orange'>
               <div className='space-y-1 text-center'>
                 <svg
