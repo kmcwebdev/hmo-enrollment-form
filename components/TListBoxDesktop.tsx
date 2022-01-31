@@ -9,14 +9,18 @@ interface TListBoxDesktopProps {
   label: string;
   name: string;
   data: Array<SelectData>;
+  select?: 'id' | 'name';
   mb?: number;
+  disabled?: boolean;
 }
 
 const TListBoxDesktop: React.FC<TListBoxDesktopProps> = ({
   label,
   name,
   data,
+  select = 'name',
   mb,
+  disabled = false,
 }) => {
   const [selected, setSelected] = useState<SelectData>(data[0]);
 
@@ -24,18 +28,18 @@ const TListBoxDesktop: React.FC<TListBoxDesktopProps> = ({
 
   useEffect(() => {
     if (!getValues(name)) {
-      setValue(name, selected.name);
+      setValue(name, selected[select]);
     }
   }, []);
 
   const handleChange = (data: SelectData) => {
-    setValue(name, data.name);
+    setValue(name, data[select]);
     setSelected(data);
   };
 
   return (
     <div className='w-full'>
-      <Listbox value={selected} onChange={handleChange}>
+      <Listbox value={selected} onChange={handleChange} disabled={disabled}>
         {({ open }) => (
           <>
             <Listbox.Label

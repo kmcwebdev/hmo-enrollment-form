@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
 const middleware = async (req: NextRequest) => {
   const url = req.nextUrl;
@@ -15,11 +15,11 @@ const middleware = async (req: NextRequest) => {
     `https://acmkmc.azurewebsites.net/api/employees/${employeeId}/hmo?apiKey=620f5854-de2a-4993-a1d7-b5a5a8f09457`
   );
 
-  if (response.status === 200) {
-    return NextResponse.redirect('/');
+  if (response.status !== 200) {
+    return new Response('Failed', { status: 400 });
   }
 
-  return NextResponse.redirect('/not-found');
+  return new Response('Success', { status: 200 });
 };
 
 export default middleware;

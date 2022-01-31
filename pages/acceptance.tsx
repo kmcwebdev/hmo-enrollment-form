@@ -33,7 +33,12 @@ const Acceptance = () => {
             processed.
           </p>
           <Link href={`/hmo-requirements?employeeId=${query.employeeId}`}>
-            fuck it
+            <button
+              type='button'
+              className='inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-skin-kmc-orange gap-x-2 hover:bg-skin-kmc-orange selection:focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-skin-kmc-orange'
+            >
+              I AGREE
+            </button>
           </Link>
         </div>
       </div>

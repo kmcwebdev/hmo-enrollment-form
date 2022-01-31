@@ -6,6 +6,7 @@ interface TInputProps {
   label: string;
   name: string;
   type?: string;
+  [x: string]: any;
 }
 
 const TInput: React.FC<TInputProps> = ({

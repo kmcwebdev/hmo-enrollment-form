@@ -1,5 +1,6 @@
+import IFile from './file';
+
 export default interface IForm {
-  typeOfEnrollment: string;
   prefix: string;
   firstName: string;
   middleName?: string;
@@ -11,4 +12,5 @@ export default interface IForm {
   doB: Date;
   entitlement: number;
   reasonForSkippingHierarchy: string;
+  hmoEnrolledDependentsFiles: IFile[];
 }
