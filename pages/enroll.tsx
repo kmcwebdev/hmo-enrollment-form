@@ -1,24 +1,13 @@
 import { PlusCircleIcon } from '@heroicons/react/solid';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Router from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ActiveRecord from '../components/ActiveRecord';
 import TDialog from '../components/TDialog';
 import { DependentProvider } from '../context/DependentContext';
 
-const Enroll = ({ data }: { data: string }) => {
+const Enroll = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const validateEmployee = () => {
-      if (data === 'Failed') Router.push('/not-found');
-
-      return;
-    };
-
-    validateEmployee();
-  }, []);
 
   return (
     <DependentProvider>
@@ -69,7 +58,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `${baseURL}/api/employee-check?employeeId=${params.employeeId}`
   );
 
-  return { props: { data: await response.text() } };
+  const message = await response.text();
+
+  if (message === 'Failed' && response.status === 400) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: '/not-found',
+      },
+      props: {
+        data: message,
+      },
+    };
+  }
+
+  return { props: { data: message } };
 };
 
 export default Enroll;
