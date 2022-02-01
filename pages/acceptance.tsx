@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import hmo from '../public/assets/images/hmo.png';
+import hmo from '../public/hmo.png';
 
 const Acceptance = () => {
   const { query, isReady } = useRouter();

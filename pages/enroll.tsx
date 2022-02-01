@@ -1,30 +1,24 @@
 import { PlusCircleIcon } from '@heroicons/react/solid';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import ActiveRecord from '../components/ActiveRecord';
 import TDialog from '../components/TDialog';
 import { DependentProvider } from '../context/DependentContext';
 
-export default function Enroll() {
+const Enroll = ({ data }: { data: string }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isReady, query } = useRouter();
 
   useEffect(() => {
-    const validateEmployee = async () => {
-      const response = await fetch(
-        `/api/employee-check?employeeId=${query.employeeId}`
-      );
-
-      const valid = await response.text();
-
-      if (valid === 'Failed') Router.push('/not-found');
+    const validateEmployee = () => {
+      if (data === 'Failed') Router.push('/not-found');
 
       return;
     };
 
-    if (isReady && query) validateEmployee();
-  }, [query, isReady]);
+    validateEmployee();
+  }, []);
 
   return (
     <DependentProvider>
@@ -65,4 +59,17 @@ export default function Enroll() {
       </div>
     </DependentProvider>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const params = context.query;
+  const baseURL = process.env.NXT_API_URL;
+
+  const response = await fetch(
+    `${baseURL}/api/employee-check?employeeId=${params.employeeId}`
+  );
+
+  return { props: { data: await response.text() } };
+};
+
+export default Enroll;

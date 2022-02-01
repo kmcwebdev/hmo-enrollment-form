@@ -1,10 +1,18 @@
 import { NextRequest } from 'next/server';
 
 const middleware = async (req: NextRequest) => {
-  const url = req.nextUrl;
+  const baseDevURL = process.env.ERP_API_DEV;
+  const baseProdURL = process.env.ERP_API_PROD;
+  const erpApiKey = process.env.ERP_API_KEY;
+  const nextUrl = req.nextUrl;
+  let baseURL = baseDevURL;
   let employeeId;
 
-  url.searchParams.forEach((val, key) => {
+  if (process.env.NODE_ENV === 'production') {
+    baseURL = baseProdURL;
+  }
+
+  nextUrl.searchParams.forEach((val, key) => {
     if (key === 'employeeId') {
       employeeId = val;
       return;
@@ -12,7 +20,7 @@ const middleware = async (req: NextRequest) => {
   });
 
   const response = await fetch(
-    `https://acmkmc.azurewebsites.net/api/employees/${employeeId}/hmo?apiKey=620f5854-de2a-4993-a1d7-b5a5a8f09457`
+    `${baseURL}/api/employees/${employeeId}/hmo?apiKey=6${erpApiKey}`
   );
 
   if (response.status !== 200) {
