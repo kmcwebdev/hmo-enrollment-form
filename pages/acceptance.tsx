@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import hmo from '../public/hmo.png';
 
 const Acceptance = () => {
   const { query, isReady } = useRouter();
@@ -17,7 +16,12 @@ const Acceptance = () => {
     <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
       <div className='max-w-3xl mx-auto'>
         <div className='mt-10 space-y-4'>
-          <Image src={hmo} alt='hmo' />
+          <Image
+            src='https://cdn.kmc.solutions/project-statics/hmo.PNG'
+            width={1000}
+            height={700}
+            alt='hmo'
+          />
           <div className='text-base text-center'>
             <a
               href='https://kmcstorage1.blob.core.windows.net/project-statics/KMC%20HMO%20Enrollment%20FAQs.61d11ed9443287.55108208.pdf'

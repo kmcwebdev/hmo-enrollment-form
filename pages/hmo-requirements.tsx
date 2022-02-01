@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import requirements from '../public/requirements.png';
 
 const HmoRequirements: React.FC = () => {
   const { query, isReady } = useRouter();
@@ -23,7 +22,12 @@ const HmoRequirements: React.FC = () => {
             </p>
           </div>
           <div>
-            <Image src={requirements} alt='requirements' />
+            <Image
+              src='https://cdn.kmc.solutions/project-statics/requirements.PNG'
+              width={1000}
+              height={800}
+              alt='requirements'
+            />
           </div>
           <Link href={`/enroll?employeeId=${query.employeeId}`}>
             <button
