@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
 import { useDependent } from '../context/DependentContext';
 import IFile from '../interface/file';
 import IForm from '../interface/form';
@@ -79,8 +80,10 @@ const entitlementData: SelectData[] = [
 ];
 
 const upload = async (file: File) => {
-  const url =
-    'https://erp-kmc.azurewebsites.net/api/Azure/blob/upload?folder=hmo&apiKey=620f5854-de2a-4993-a1d7-b5a5a8f09457';
+  const baseMNProdURL = 'https://erp-api.kmc.solutions';
+  const erpApiKey = '620f5854-de2a-4993-a1d7-b5a5a8f09457';
+
+  const url = `${baseMNProdURL}/api/Azure/blob/upload?folder=hmo&apiKey=${erpApiKey}`;
 
   const data = new FormData();
   data.append('file', file);
@@ -97,7 +100,10 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
   const { data, setData } = useDependent();
   const [files, setFiles] = useState<IFile[]>();
 
-  const [loadingUpload, setLoadingUpload] = useState(false);
+  const { isLoading, mutateAsync } = useMutation({
+    mutationKey: 'Upload',
+    mutationFn: upload,
+  });
 
   const useFormReturn = useForm<IForm & FormExtend>({
     mode: 'onChange',
@@ -107,26 +113,18 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
     },
   });
 
-  const onDrop = useCallback(
-    async (acceptedFiles) => {
-      setLoadingUpload(true);
-      const files = acceptedFiles as File[];
+  const onDrop = useCallback(async (acceptedFiles) => {
+    const files = acceptedFiles as File[];
 
-      const x = files.map(async (file) => ({
-        filePath: await upload(file),
-        fileName: file.name,
-      }));
+    const x = files.map(async (file) => ({
+      filePath: await mutateAsync(file),
+      fileName: file.name,
+    }));
 
-      const y = await Promise.all(x);
+    const y = await Promise.all(x);
 
-      if (y) {
-        setLoadingUpload(false);
-      }
-
-      setFiles((old) => [...(old || []), ...y]);
-    },
-    [loadingUpload]
-  );
+    setFiles((old) => [...(old || []), ...y]);
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -229,7 +227,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
             <svg
               className={classNames(
                 'w-12 h-12 mx-auto text-gray-400',
-                loadingUpload ? 'animate-spin' : 'animate-none'
+                isLoading ? 'animate-spin' : 'animate-none'
               )}
               stroke='currentColor'
               fill='none'

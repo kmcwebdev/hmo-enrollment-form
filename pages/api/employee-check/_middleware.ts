@@ -1,16 +1,12 @@
 import { NextRequest } from 'next/server';
 
 const middleware = async (req: NextRequest) => {
-  const baseDevURL = process.env.ERP_API_DEV;
-  const baseProdURL = process.env.ERP_API_PROD;
+  const baseHRProdURL = process.env.ERP_HR_API_PROD;
   const erpApiKey = process.env.ERP_API_KEY;
   const nextUrl = req.nextUrl;
-  let baseURL = baseDevURL;
   let employeeId;
 
-  if (process.env.NODE_ENV === 'production') {
-    baseURL = baseProdURL;
-  }
+  console.log(baseHRProdURL);
 
   nextUrl.searchParams.forEach((val, key) => {
     if (key === 'employeeId') {
@@ -20,7 +16,7 @@ const middleware = async (req: NextRequest) => {
   });
 
   const response = await fetch(
-    `${baseURL}/api/employees/${employeeId}/hmo?apiKey=6${erpApiKey}`
+    `${baseHRProdURL}/api/employees/${employeeId}/hmo?apiKey=${erpApiKey}`
   );
 
   if (response.status !== 200) {
