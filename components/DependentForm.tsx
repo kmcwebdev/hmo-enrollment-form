@@ -144,6 +144,8 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
 
         formData.hmoEnrolledDependentsFiles = files || [];
 
+        formData.gender = formData.gender.charAt(0);
+
         if (isValid) {
           setData((old) => ({
             typeOfEnrollment: foo!,

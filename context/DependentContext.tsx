@@ -4,6 +4,7 @@ import {
   FunctionComponent,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 import IForm from '../interface/form';
@@ -27,10 +28,24 @@ const DependentContext = createContext<RbContext>({
 });
 
 const DependentProvider: FunctionComponent = ({ children }) => {
+  const IS_SERVER = typeof window === 'undefined';
+
   const [data, setData] = useState<{
     typeOfEnrollment: string;
     dependents: IForm[];
-  } | null>(null);
+  } | null>(
+    null ||
+      (JSON.parse((!IS_SERVER && localStorage.getItem('data')) || '[]') as {
+        typeOfEnrollment: string;
+        dependents: IForm[];
+      })
+  );
+
+  useEffect(() => {
+    if (data) {
+      localStorage.setItem('data', JSON.stringify(data));
+    }
+  }, [data]);
 
   return (
     <DependentContext.Provider value={{ data, setData }}>
