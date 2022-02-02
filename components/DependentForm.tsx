@@ -8,7 +8,6 @@ import { useDependent } from '../context/DependentContext';
 import IFile from '../interface/file';
 import IForm from '../interface/form';
 import SelectData from '../interface/select-data';
-import classNames from '../utils/class-name';
 import FormSchema from '../yup-schema/form-schema';
 import { Form } from './Form';
 import TDatepicker from './TDatePicker';
@@ -224,23 +223,37 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
       >
         <div className='flex justify-center w-full px-6 pt-5 pb-6 border-2 border-dashed rounded-md border-skin-kmc-orange'>
           <div className='space-y-1 text-center'>
-            <svg
-              className={classNames(
-                'w-12 h-12 mx-auto text-gray-400',
-                isLoading ? 'animate-spin' : 'animate-none'
-              )}
-              stroke='currentColor'
-              fill='none'
-              viewBox='0 0 48 48'
-              aria-hidden='true'
-            >
-              <path
-                d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
-                strokeWidth={2}
-                strokeLinecap='round'
-                strokeLinejoin='round'
-              />
-            </svg>
+            {isLoading ? (
+              <svg
+                className='w-12 h-12 mx-auto text-gray-400 animate-spin'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15'
+                />
+              </svg>
+            ) : (
+              <svg
+                className='w-12 h-12 mx-auto text-gray-400'
+                stroke='currentColor'
+                fill='none'
+                viewBox='0 0 48 48'
+                aria-hidden='true'
+              >
+                <path
+                  d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
+                  strokeWidth={2}
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                />
+              </svg>
+            )}
+
             <div className='flex text-sm text-gray-600'>
               <label
                 htmlFor='file-upload'
