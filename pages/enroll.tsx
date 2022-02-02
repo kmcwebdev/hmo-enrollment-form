@@ -60,8 +60,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const message = await response.text();
 
-  console.log(message);
-
   if (message === 'Failed' && response.status === 400) {
     return {
       redirect: {

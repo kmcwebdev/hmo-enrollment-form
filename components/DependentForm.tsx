@@ -263,15 +263,13 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
       </div>
       {/** Upload file example end */}
 
-      {files && files.length > 0 && (
-        <button
-          type='submit'
-          className='inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-skin-kmc-orange gap-x-2 hover:bg-skin-kmc-orange selection:focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-skin-kmc-orange'
-        >
-          <PlusCircleIcon className='ml-2 -mr-0.5 h-4 w-4' aria-hidden='true' />
-          Submit
-        </button>
-      )}
+      <button
+        type='submit'
+        className='inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-skin-kmc-orange gap-x-2 hover:bg-skin-kmc-orange selection:focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-skin-kmc-orange'
+      >
+        <PlusCircleIcon className='ml-2 -mr-0.5 h-4 w-4' aria-hidden='true' />
+        Submit
+      </button>
     </Form>
   );
 };

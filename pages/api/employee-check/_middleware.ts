@@ -6,8 +6,6 @@ const middleware = async (req: NextRequest) => {
   const nextUrl = req.nextUrl;
   let employeeId;
 
-  console.log(baseHRProdURL);
-
   nextUrl.searchParams.forEach((val, key) => {
     if (key === 'employeeId') {
       employeeId = val;
