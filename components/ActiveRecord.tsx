@@ -1,8 +1,13 @@
 import { useEffect } from 'react';
+import { useMutation } from 'react-query';
 import { useDependent } from '../context/DependentContext';
 
 const ActiveRecord: React.FC = () => {
   const { data } = useDependent();
+
+  const { isLoading, mutateAsync } = useMutation({
+    mutationKey: 'postEmployeeDependents',
+  });
 
   useEffect(() => {
     if (data) {
