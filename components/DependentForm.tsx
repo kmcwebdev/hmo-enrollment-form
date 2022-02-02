@@ -8,6 +8,7 @@ import { useDependent } from '../context/DependentContext';
 import IFile from '../interface/file';
 import IForm from '../interface/form';
 import SelectData from '../interface/select-data';
+import classNames from '../utils/class-name';
 import FormSchema from '../yup-schema/form-schema';
 import { Form } from './Form';
 import TDatepicker from './TDatePicker';
@@ -99,7 +100,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
   const { data, setData } = useDependent();
   const [files, setFiles] = useState<IFile[]>();
 
-  const { isLoading, mutateAsync } = useMutation({
+  const { isLoading, mutateAsync, isSuccess } = useMutation({
     mutationKey: 'Upload',
     mutationFn: upload,
   });
@@ -146,7 +147,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
 
         formData.gender = formData.gender.charAt(0);
 
-        if (isValid) {
+        if (isValid && files?.length && isSuccess) {
           setData((old) => ({
             typeOfEnrollment: foo!,
             dependents: [...(old?.dependents || []), formData],
@@ -279,7 +280,13 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
 
       <button
         type='submit'
-        className='inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-skin-kmc-orange gap-x-2 hover:bg-skin-kmc-orange selection:focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-skin-kmc-orange'
+        className={classNames(
+          isLoading || !isSuccess
+            ? 'bg-gray-500 hover:bg-gray-500 focus:ring-gray-500'
+            : 'bg-skin-kmc-orange hover:bg-skin-kmc-orange focus:ring-skin-kmc-orange',
+          'inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm gap-x-2 selection:focus:outline-none focus:ring-2 focus:ring-offset-2'
+        )}
+        disabled={isLoading || !isSuccess}
       >
         <PlusCircleIcon className='ml-2 -mr-0.5 h-4 w-4' aria-hidden='true' />
         Submit
