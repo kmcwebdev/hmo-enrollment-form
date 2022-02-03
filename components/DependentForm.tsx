@@ -70,11 +70,11 @@ const reasonForSkippingHierarchyData: SelectData[] = [
 
 const entitlementData: SelectData[] = [
   {
-    id: 1,
+    id: 0,
     name: 'Free',
   },
   {
-    id: 2,
+    id: 1,
     name: 'Salary Deduction',
   },
 ];
@@ -209,6 +209,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
           label='Entitlement'
           name='entitlement'
           data={entitlementData}
+          select='id'
           mb={1.5}
         />
       </div>
