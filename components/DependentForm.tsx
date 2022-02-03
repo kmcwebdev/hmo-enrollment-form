@@ -31,9 +31,9 @@ const typesOfEnrollmentData: SelectData[] = [
 ];
 
 const prefixData: SelectData[] = [
-  { id: 1, name: 'Mr' },
-  { id: 2, name: 'Ms' },
-  { id: 3, name: 'Mrs' },
+  { id: 1, name: 'Mr.' },
+  { id: 2, name: 'Ms.' },
+  { id: 3, name: 'Mrs.' },
 ];
 
 const genderData: SelectData[] = [
