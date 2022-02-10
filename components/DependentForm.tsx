@@ -134,6 +134,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ setIsOpen }) => {
     formState: { isValid },
     handleSubmit,
   } = useFormReturn;
+
   return (
     <Form
       useFormReturn={useFormReturn}

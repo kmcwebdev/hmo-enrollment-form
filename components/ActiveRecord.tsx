@@ -14,7 +14,7 @@ const postDependents = async (payload: {
 }) => {
   const { employeeId, data } = payload;
 
-  const baseMNProdURL = 'https://acmkmc.azurewebsites.net';
+  const baseMNProdURL = 'https://hr-api.kmc.solutions';
   const erpApiKey = '620f5854-de2a-4993-a1d7-b5a5a8f09457';
 
   const response = await fetch(
