@@ -4,6 +4,7 @@ import { useMutation } from 'react-query';
 import { useDependent } from '../context/DependentContext';
 import IForm from '../interface/form';
 import classNames from '../utils/class-name';
+import { entitlementData } from './DependentForm';
 
 const postDependents = async (payload: {
   employeeId: string;
@@ -116,7 +117,11 @@ const ActiveRecord: React.FC = () => {
                           {dependent.relationship}
                         </td>
                         <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
-                          {dependent.entitlement}
+                          {
+                            entitlementData.find(
+                              (v) => v.id === dependent.entitlement
+                            )?.name
+                          }
                         </td>
                       </tr>
                     ))}

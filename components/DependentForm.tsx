@@ -68,7 +68,7 @@ const reasonForSkippingHierarchyData: SelectData[] = [
   { id: 8, name: 'Parent dependent has a different last name' },
 ];
 
-const entitlementData: SelectData[] = [
+export const entitlementData: SelectData[] = [
   {
     id: 0,
     name: 'Free',
