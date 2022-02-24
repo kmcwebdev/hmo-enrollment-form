@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
 import { useDependent } from '../context/DependentContext';
@@ -37,7 +37,7 @@ const ActiveRecord: React.FC = () => {
   const { isReady, query } = useRouter();
   const { data, setData } = useDependent();
 
-  const { isLoading, mutateAsync, isSuccess } = useMutation({
+  const { isLoading, mutateAsync, isSuccess, isError, error } = useMutation({
     mutationKey: 'postEmployeeDependents',
     mutationFn: postDependents,
     onSuccess: () => {
@@ -67,6 +67,24 @@ const ActiveRecord: React.FC = () => {
                   enrollment. We've sent a request number in your email. Please
                   keep it for follow-up purposes.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {!isLoading && isError && (
+        <div className='p-4 rounded-md bg-red-50'>
+          <div className='flex'>
+            <div className='flex-shrink-0'>
+              <XCircleIcon
+                className='w-5 h-5 text-red-400'
+                aria-hidden='true'
+              />
+            </div>
+            <div className='ml-3'>
+              <h3 className='text-sm font-medium text-red-800'>Failed</h3>
+              <div className='mt-2 text-sm text-red-700'>
+                {JSON.stringify(error)}
               </div>
             </div>
           </div>
