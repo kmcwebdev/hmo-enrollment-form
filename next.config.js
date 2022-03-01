@@ -11,6 +11,6 @@ module.exports = {
     ];
   },
   images: {
-    domains: ['cdn.kmc.solutions'],
+    domains: ['cdn.kmc.solutions', 'kmcstorage1.blob.core.windows.net'],
   },
 };

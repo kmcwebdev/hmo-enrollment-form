@@ -23,7 +23,7 @@ const HmoRequirements: React.FC = () => {
           </div>
           <div>
             <Image
-              src='https://cdn.kmc.solutions/project-statics/requirements.PNG'
+              src='https://kmcstorage1.blob.core.windows.net/project-statics/requirements.PNG'
               width={1000}
               height={800}
               alt='requirements'
