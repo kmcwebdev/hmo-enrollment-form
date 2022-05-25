@@ -93,7 +93,7 @@ const HmoRequirements: React.FC = () => {
                       <tbody className='bg-white'>
                         <tr key={1}>
                           <td className='hidden px-8 py-4 space-y-5 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap lg:table-cell'>
-                            Single
+                            Married
                           </td>
                           <td className='hidden px-3 py-4 space-y-5 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap lg:table-cell'>
                             <p>Spouse</p>
@@ -113,7 +113,7 @@ const HmoRequirements: React.FC = () => {
                         </tr>
                         <tr key={2}>
                           <td className='hidden px-8 py-4 space-y-5 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap lg:table-cell'>
-                            Married
+                            Single
                           </td>
                           <td className='hidden px-3 py-4 space-y-5 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap lg:table-cell'>
                             <p>Parents</p>
