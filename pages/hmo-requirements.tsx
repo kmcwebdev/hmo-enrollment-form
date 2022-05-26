@@ -141,18 +141,18 @@ const HmoRequirements: React.FC = () => {
                           </td>
                           <td className='hidden px-3 py-4 space-y-5 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap lg:table-cell'>
                             <p>Children</p>
-                            <p>Spouse</p>
                             <p>Parents</p>
+                            <p>Siblings</p>
                           </td>
                           <td className='hidden px-3 py-4 space-y-5 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap lg:table-cell'>
                             <p>15 Days old to 25 Yrs Old</p>
-                            <p>Up to 65 Yrs Old</p>
                             <p>Up to 100 Yrs Old</p>
+                            <p>15 Days old to 25 Yrs Old</p>
                           </td>
                           <td className='hidden px-3 py-4 space-y-5 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap lg:table-cell'>
                             <p>Marriage Contract</p>
-                            <p>Birth Certificate</p>
                             <p>Employee’s Birth Certificate 1 Valid ID</p>
+                            <p>Birth Certificate</p>
                           </td>
                         </tr>
                       </tbody>
