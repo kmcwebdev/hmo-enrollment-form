@@ -2,16 +2,6 @@ import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-const people = [
-  {
-    name: 'Lindsay Walton',
-    title: 'Front-end Developer',
-    email: 'lindsay.walton@example.com',
-    role: 'Member',
-  },
-  // More people...
-];
-
 const HmoRequirements: React.FC = () => {
   const { query, isReady } = useRouter();
 
