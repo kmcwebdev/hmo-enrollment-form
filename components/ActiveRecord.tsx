@@ -36,6 +36,7 @@ const postDependents = async (payload: {
 
     // get error message from body or default to response status
     const error = (data && data.message) || response.status;
+
     return Promise.reject(error);
   }
 
