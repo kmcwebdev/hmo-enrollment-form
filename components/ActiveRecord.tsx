@@ -46,6 +46,9 @@ const ActiveRecord: React.FC = () => {
     },
   });
 
+  console.log('is_error', isError);
+  console.log('is_success', isSuccess);
+
   return (
     <div className='space-y-5'>
       {!isLoading && isSuccess && (
