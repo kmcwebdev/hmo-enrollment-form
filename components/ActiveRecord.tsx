@@ -47,6 +47,7 @@ const ActiveRecord: React.FC = () => {
   });
 
   console.log('is_error', isError);
+  console.log('error', error);
   console.log('is_success', isSuccess);
 
   return (
