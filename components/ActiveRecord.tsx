@@ -30,6 +30,10 @@ const postDependents = async (payload: {
     }
   );
 
+  if (response.status !== 200) {
+    console.log(response);
+  }
+
   return await response.json();
 };
 
@@ -45,10 +49,6 @@ const ActiveRecord: React.FC = () => {
       setData(null);
     },
   });
-
-  console.log('is_error', isError);
-  console.log('error', error);
-  console.log('is_success', isSuccess);
 
   return (
     <div className='space-y-5'>
