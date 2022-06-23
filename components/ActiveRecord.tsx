@@ -30,8 +30,13 @@ const postDependents = async (payload: {
     }
   );
 
-  if (response.status !== 200) {
-    console.log(await response.json());
+  // check for error response
+  if (!response.ok) {
+    const data = await response.json();
+
+    // get error message from body or default to response status
+    const error = (data && data.message) || response.status;
+    return Promise.reject(error);
   }
 
   return await response.json();
