@@ -31,7 +31,7 @@ const postDependents = async (payload: {
   );
 
   if (response.status !== 200) {
-    console.log(response);
+    console.log(await response.json());
   }
 
   return await response.json();
