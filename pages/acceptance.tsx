@@ -25,7 +25,7 @@ const Acceptance = () => {
           <div className='text-base text-center'>
             <a
               className='text-blue-500'
-              href='https://kmcstorage1.blob.core.windows.net/project-statics/KMC_HMO%20Enrollment%20FAQs.pdf'
+              href='https://cdn.kmc.solutions/project-statics/KMC HMO Enrollment FAQs 2022.pdf'
               target='_blank'
             >
               Click here to read FAQ's
