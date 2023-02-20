@@ -116,7 +116,7 @@ const HmoRequirements: React.FC = () => {
                             <p>Up to 65 Yrs Old</p>
                           </td>
                           <td className='hidden px-3 py-4 space-y-5 text-sm text-gray-500 border-b border-gray-200 whitespace-nowrap lg:table-cell'>
-                            <p>Employee’s Birth Certificate 1 Valid ID</p>
+                            <p>Employee's Birth Certificate and Parent's Valid ID</p>
                             <p>Birth Certificate</p>
                             <p className='whitespace-normal w-[16rem]'>
                               Cenomer (Employee and Dependent) Brgy Certificate
