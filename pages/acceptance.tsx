@@ -25,7 +25,7 @@ const Acceptance = () => {
           <div className='text-base text-center'>
             <a
               className='text-blue-500'
-              href='https://cdn.kmc.solutions/project-statics/2969589_KMC HMO Enrollment FAQs for 2023.pdf'
+              href='https://cdn.kmc.solutions/hmo-public/3051258_KMC%20HMO%20Enrollment%20FAQs%20for%202023.pdf'
               target='_blank'
             >
               Click here to read FAQ's
