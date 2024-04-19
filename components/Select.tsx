@@ -1,7 +1,7 @@
-import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import React, { Fragment, HTMLProps, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import React, { Fragment, HTMLProps, useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 export interface IOption {
   name: string;
@@ -53,52 +53,52 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <div {...rest}>
-      <label htmlFor={name} className='block text-black'>
+      <label htmlFor={name} className="block text-black">
         {label}
       </label>
 
       <Listbox value={getValues(name)} onChange={handleChange}>
-        <div className='relative mt-1'>
+        <div className="relative mt-1">
           <Listbox.Button
             className={`relative w-full py-2 pl-3 pr-10 text-left bg-white border transition-all rounded-lg focus:shadow-sm cursor-default sm:text-sm ${
-              errors[name] ? 'border-rose-500' : 'border-gray-300'
+              errors[name] ? "border-rose-500" : "border-gray-300"
             }`}
           >
             <span
               className={`block truncate transition-all ${
                 errors[name]
-                  ? 'text-rose-600'
+                  ? "text-rose-600"
                   : selected.value !== null
-                  ? 'text-gray-700'
-                  : 'text-gray-400'
+                  ? "text-gray-700"
+                  : "text-gray-400"
               }`}
             >
               {selected.name}
             </span>
-            <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
+            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <SelectorIcon
                 className={`w-5 h-5 ${
-                  errors[name] ? 'text-rose-500' : 'text-gray-400'
+                  errors[name] ? "text-rose-500" : "text-gray-400"
                 }`}
-                aria-hidden='true'
+                aria-hidden="true"
               />
             </span>
           </Listbox.Button>
           <Transition
             as={Fragment}
-            leave='transition ease-in duration-100'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            <Listbox.Options className='absolute z-40 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+            <Listbox.Options className="absolute z-40 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {options.map((option, optionIdx) => (
                 <Listbox.Option
                   key={optionIdx}
                   className={({ active }) =>
                     `${
                       active
-                        ? 'text-primary bg-primary bg-opacity-10'
-                        : 'text-gray-900'
+                        ? "text-primary bg-primary bg-opacity-10"
+                        : "text-gray-900"
                     }
                       cursor-default select-none relative py-2 pl-10 pr-4 transition-all`
                   }
@@ -109,8 +109,8 @@ const Select: React.FC<SelectProps> = ({
                       <span
                         className={`${
                           selected.name === option.name
-                            ? 'font-proxiSemiBold text-primary'
-                            : 'font-proxiRegular'
+                            ? "font-proxiSemiBold text-primary"
+                            : "font-proxiRegular"
                         } block truncate transition-all`}
                       >
                         {option.name}
@@ -118,11 +118,11 @@ const Select: React.FC<SelectProps> = ({
                       {selected.name === option.name ? (
                         <span
                           className={`${
-                            active ? 'text-primary' : 'text-primary'
+                            active ? "text-primary" : "text-primary"
                           }
                             absolute inset-y-0 left-0 flex items-center pl-3 transition-all`}
                         >
-                          <CheckIcon className='w-5 h-5' aria-hidden='true' />
+                          <CheckIcon className="w-5 h-5" aria-hidden="true" />
                         </span>
                       ) : null}
                     </>
@@ -135,8 +135,8 @@ const Select: React.FC<SelectProps> = ({
       </Listbox>
 
       {errors[name] && (
-        <p className='mt-2 text-sm text-rose-600' id='email-error'>
-          {errors[name].message}
+        <p className="mt-2 text-sm text-rose-600" id="email-error">
+          {errors[name]?.message || "Something wen't wrong"}
         </p>
       )}
     </div>
